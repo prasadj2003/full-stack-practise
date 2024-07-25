@@ -1,0 +1,43 @@
+<html>
+    <body>
+        <input type="text" placeholder="number 1" id="num1"><br></br>
+        <input type="text" placeholder="number 2" id="num2"><br></br>
+        <button type="submit" id="btn" onclick="popDiv()">Calculate sum</button><br></br>
+        <div id="finalSum"></div>
+    </body>
+
+    <script>
+
+        // this is debouncing. I we emove the submit button, request should go when I type something in the input field.
+        // BUT the request should not go everytime, I type something. If I type too fast so , let me complete typing and then send the request
+        let timeout;
+        function deBounce() {
+            // if deBounce function is not called send a request 
+            // but if it is called, clear the whole clock and then start a new clock
+
+            clearTimeout(timeout);
+            timeout = setTimeout(function () {
+                popDiv();
+            }, 100);
+        }
+
+        function popDiv() {
+            // const text = document.createElement('h1');
+            // const line = document.createTextNode("hello world");
+
+            // text.appendChild(line);
+            // document.getElementById('finalSum').appendChild(text);
+        
+            const num1 = parseInt(document.getElementById('num1').value);
+            const num2 = parseInt(document.getElementById('num2').value);
+
+            const ans = num1+num2;
+
+            const temp = document.createElement('h1');
+            const data = document.createTextNode(ans);
+            temp.appendChild(data);
+
+            document.getElementById('finalSum').appendChild(temp);
+        }
+    </script> 
+</html>

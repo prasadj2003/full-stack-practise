@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interest Calculator</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.26.1/axios.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+    <input placeholder="Principal" id="principal" type="number"><br><br>
+    <input placeholder="Rate" id="rate" type="number"><br><br>
+    <input placeholder="Time" id="time" type="number"><br><br>
+
+    <button id="btn" type="submit">Calculate Interest</button>
+
+    <div id="interest"></div>
+    <div id="total"></div>
+
+    <script>
+        document.getElementById('btn').addEventListener('click', () => {
+            const principal = document.getElementById('principal').value;
+            const rate = document.getElementById('rate').value;
+            const time = document.getElementById('time').value;
+
+            axios.get(`http://localhost:3000/interest?principal=${principal}&rate=${rate}&time=${time}`)
+                .then(response => {
+                    document.getElementById('interest').innerText = `Interest: ${response.data.interest}`;
+                    document.getElementById('total').innerText = `Total: ${response.data.total}`;
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
